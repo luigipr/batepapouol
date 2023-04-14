@@ -53,7 +53,7 @@ function chooseName() {
 // }
 
 
-function renderMessages() {
+function renderMessages(messages) {
     const ulMessages = document.querySelector('.messages')
     ulMessages.innerHTML = '';
 
