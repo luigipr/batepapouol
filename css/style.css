@@ -46,11 +46,8 @@ body {
 .messages {
     margin-top: 100px;
     margin-bottom: 100px;
-    margin-bottom: 8px;
+    margin-bottom: 60px;
     
-}
-.messages:last-child {
-    margin-bottom: 100px;
 }
 
 input:focus{
