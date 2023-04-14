@@ -2,6 +2,7 @@ let userName = '';
 let messages = [];
 let user ='';
 let load;
+let objName = {};
 axios.defaults.headers.common['Authorization'] = '2GkGoRP9ETlDO5k8paZaQY5V';
 
 chooseName();
@@ -13,7 +14,7 @@ promisse.then(processMessages);
 
 }
 function processMessages(response){
-    console.log(response);
+    //console.log(response);
     
     messages = response.data;
 
@@ -24,7 +25,7 @@ function processMessages(response){
 
 function chooseName() {
     let promptname = prompt('digite seu nome:');
-    const objName = {
+    objName = {
         name: promptname
     }
     user = promptname;
@@ -36,21 +37,19 @@ function chooseName() {
 
 }
 
+setInterval( stillon(), 5000 );
 
-// function logoff() {
-//     load = window.location.reload();
-// }
+function stillon() {
+    const promisse = axios.post('https://mock-api.driven.com.br/api/vm/uol/status', objName);
+    console.log(promisse)
+     promisse.then();
+    promisse.catch( logoff );
+}
 
-// function online() {
-//     const stillon = {
-//         name: user
-//     }
 
-//     const promisse = axios.post('https://mock-api.driven.com.br/api/vm/uol/status', stillon);
-
-//     promisse.then( continueon );
-//     promisse.catch( logoff );
-// }
+function logoff() {
+    window.location.reload();
+}
 
 
 function renderMessages(messages) {
