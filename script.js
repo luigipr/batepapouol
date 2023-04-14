@@ -5,6 +5,7 @@ let load;
 axios.defaults.headers.common['Authorization'] = '2GkGoRP9ETlDO5k8paZaQY5V';
 
 chooseName();
+userName = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages');
 
 function pagestart() {
 const promisse = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages');
@@ -16,7 +17,7 @@ function processMessages(response){
     
     messages = response.data;
 
-    renderMessages();
+    renderMessages(messages);
 }
 // setInterval(pagestart(), 3000);
 // setInterval(online(), 5000);
@@ -30,7 +31,7 @@ function chooseName() {
     console.log(objName);
     const promisse = axios.post('https://mock-api.driven.com.br/api/vm/uol/participants', objName);
 
-    promisse.then(success);
+    promisse.then(pagestart);
     promisse.catch(failure);
 
 }
@@ -77,8 +78,8 @@ function renderMessages() {
             </li>`
         }
     }
-    console.log(ulMessages)
-    
+   // console.log(ulMessages);
+    setInterval(pagestart(), 3000);    
 }
 
 function sendMessage(){
@@ -96,7 +97,7 @@ function sendMessage(){
 	 	type: "message",
 	 	time: now
     };
-    console.log(newmessage)
+    //console.log(newmessage)
   
     console.log('vai enviar a rmensagem');
 
@@ -112,11 +113,6 @@ function error(response) {
     console.log(response)
 }
 
-function success(response) {
-    console.log(response);
-    console.log(response.data);
-    pagestart();
-}
 function failure(error) {
     console.log('ocorreu um erro')
     chooseName();
