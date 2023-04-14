@@ -5,8 +5,6 @@ let load;
 let objName = {};
 axios.defaults.headers.common['Authorization'] = '2GkGoRP9ETlDO5k8paZaQY5V';
 
-chooseName();
-userName = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages');
 
 function pagestart() {
 const promisse = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages');
@@ -20,8 +18,9 @@ function processMessages(response){
 
     renderMessages(messages);
 }
-// setInterval(pagestart(), 3000);
-// setInterval(online(), 5000);
+
+//setInterval(pagestart, 3000);
+
 
 function chooseName() {
     let promptname = prompt('digite seu nome:');
@@ -37,7 +36,9 @@ function chooseName() {
 
 }
 
-setInterval( stillon(), 5000 );
+chooseName()
+
+setInterval( stillon, 5000 );
 
 function stillon() {
     const promisse = axios.post('https://mock-api.driven.com.br/api/vm/uol/status', objName);
