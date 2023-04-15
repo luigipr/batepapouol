@@ -74,7 +74,7 @@ function renderMessages(messages) {
             } else {
             ulMessages.innerHTML +=  
             `<li class='message' data-test="message">
-                <i>(${message.time})</i>  <strong>${message.from}</strong> para <strong>${message.to}</strong>: 
+                <i>(${message.time})</i>  <strong>${message.from}</strong> para <strong>${message.to}</strong>: ${message.text} 
             </li>`
         }
     }
@@ -86,6 +86,7 @@ function sendMessage(){
     // pegar os dados que foram digitados pelo usuario nos inputs e textareas
     const messagefield = document.querySelector('.text');
     const text = messagefield.value
+    console.log(text)
     const today = new Date()
     const now = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
@@ -114,6 +115,9 @@ function error(response) {
 }
 
 function failure(error) {
+    if (error.error === 400) {
+        console.log('nome ja existe')
+    }
     console.log('ocorreu um erro')
     chooseName();
 }
