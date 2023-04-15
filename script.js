@@ -5,6 +5,7 @@ let load;
 let objName = {};
 axios.defaults.headers.common['Authorization'] = '2GkGoRP9ETlDO5k8paZaQY5V';
 
+pagestart();
 
 function pagestart() {
 const promisse = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages');
