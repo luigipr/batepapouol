@@ -6,7 +6,7 @@ let objName = {};
 axios.defaults.headers.common['Authorization'] = '2GkGoRP9ETlDO5k8paZaQY5V';
 
 pagestart();
-setInterval(pagestart(), 3000);
+setInterval(pagestart, 3000);
 
 function pagestart() {
 const promisse = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages');
@@ -24,7 +24,41 @@ function processMessages(response){
     
     messages = response.data;
 
-    renderMessages(messages);
+
+    const ulMessages = document.querySelector('.messages')
+    ulMessages.innerHTML = '';
+
+    for( let i = 0; i < messages.length; i++){
+        // pergar mensagem por mensagem
+        let message = messages[i];    
+        // criar um elemento <li>] e adicionar no meu elemento <ul>
+    //     from: "João",
+	// 	to: "Todos",
+	// 	text: "entra na sala...",
+	// 	type: "status",
+	// 	time: "08:01:17"
+         if (message.type === 'status') {
+         ulMessages.innerHTML += `
+             <li class='status-message' data-test="message">
+                 <i>(${message.time})</i>  <strong>${message.from}</strong> ${message.text} 
+             </li>`
+            } else if (message.type === "private-message") {
+                ulMessages.innerHTML += `
+             <li class='private-message' data-test="message">
+                 <i>(${message.time})</i>  <strong>${message.from}</strong> reservadamente para <strong>${message.to}</strong>: ${message.text} 
+             </li>`
+            }
+            else {
+            ulMessages.innerHTML +=  
+            `<li class='message' data-test="message">
+                <i>(${message.time})</i>  <strong>${message.from}</strong> para <strong>${message.to}</strong>: ${message.text} 
+            </li>`
+        }
+    }
+
+
+
+//   renderMessages(messages);
 }
 
 //setInterval(pagestart, 3000);
@@ -61,39 +95,39 @@ function logoff() {
 }
 
 
-function renderMessages(messages) {
-    const ulMessages = document.querySelector('.messages')
-    ulMessages.innerHTML = '';
+// function renderMessages(messages) {
+//     const ulMessages = document.querySelector('.messages')
+//     ulMessages.innerHTML = '';
 
-    for( let i = 0; i < messages.length; i++){
-        // pergar mensagem por mensagem
-        let message = messages[i];    
-        // criar um elemento <li>] e adicionar no meu elemento <ul>
-    //     from: "João",
-	// 	to: "Todos",
-	// 	text: "entra na sala...",
-	// 	type: "status",
-	// 	time: "08:01:17"
-         if (message.type === 'status') {
-         ulMessages.innerHTML += `
-             <li class='status-message' data-test="message">
-                 <i>(${message.time})</i>  <strong>${message.from}</strong> ${message.text} 
-             </li>`
-            } else if (message.type === "private-message") {
-                ulMessages.innerHTML += `
-             <li class='private-message' data-test="message">
-                 <i>(${message.time})</i>  <strong>${message.from}</strong> reservadamente para <strong>${message.to}</strong>: ${message.text} 
-             </li>`
-            }
-            else {
-            ulMessages.innerHTML +=  
-            `<li class='message' data-test="message">
-                <i>(${message.time})</i>  <strong>${message.from}</strong> para <strong>${message.to}</strong>: ${message.text} 
-            </li>`
-        }
-    }
-   // console.log(ulMessages);   
-}
+//     for( let i = 0; i < messages.length; i++){
+//         // pergar mensagem por mensagem
+//         let message = messages[i];    
+//         // criar um elemento <li>] e adicionar no meu elemento <ul>
+//     //     from: "João",
+// 	// 	to: "Todos",
+// 	// 	text: "entra na sala...",
+// 	// 	type: "status",
+// 	// 	time: "08:01:17"
+//          if (message.type === 'status') {
+//          ulMessages.innerHTML += `
+//              <li class='status-message' data-test="message">
+//                  <i>(${message.time})</i>  <strong>${message.from}</strong> ${message.text} 
+//              </li>`
+//             } else if (message.type === "private-message") {
+//                 ulMessages.innerHTML += `
+//              <li class='private-message' data-test="message">
+//                  <i>(${message.time})</i>  <strong>${message.from}</strong> reservadamente para <strong>${message.to}</strong>: ${message.text} 
+//              </li>`
+//             }
+//             else {
+//             ulMessages.innerHTML +=  
+//             `<li class='message' data-test="message">
+//                 <i>(${message.time})</i>  <strong>${message.from}</strong> para <strong>${message.to}</strong>: ${message.text} 
+//             </li>`
+//         }
+//     }
+//    // console.log(ulMessages);   
+// }
 
 function sendMessage(){
     // pegar os dados que foram digitados pelo usuario nos inputs e textareas
