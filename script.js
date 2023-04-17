@@ -6,12 +6,19 @@ let objName = {};
 axios.defaults.headers.common['Authorization'] = '2GkGoRP9ETlDO5k8paZaQY5V';
 
 pagestart();
+setInterval(pagestart(), 3000);
 
 function pagestart() {
 const promisse = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages');
+console.log(promisse)
+// if (messages.message.from.includes(user)) {
+//     chooseName();
+//  }
 promisse.then(processMessages);
-
 }
+
+
+
 function processMessages(response){
     //console.log(response);
     
@@ -31,7 +38,7 @@ function chooseName() {
     user = promptname;
     console.log(objName);
     const promisse = axios.post('https://mock-api.driven.com.br/api/vm/uol/participants', objName);
-
+    
     promisse.then(pagestart);
     promisse.catch(failure);
 
@@ -70,17 +77,22 @@ function renderMessages(messages) {
          if (message.type === 'status') {
          ulMessages.innerHTML += `
              <li class='status-message' data-test="message">
-                 <i>(${message.time})</i>  <strong>${message.from}</strong> entra na sala...
+                 <i>(${message.time})</i>  <strong>${message.from}</strong> ${message.text} 
              </li>`
-            } else {
+            } else if (message.type === "private-message") {
+                ulMessages.innerHTML += `
+             <li class='private-message' data-test="message">
+                 <i>(${message.time})</i>  <strong>${message.from}</strong> reservadamente para <strong>${message.to}</strong>: ${message.text} 
+             </li>`
+            }
+            else {
             ulMessages.innerHTML +=  
             `<li class='message' data-test="message">
                 <i>(${message.time})</i>  <strong>${message.from}</strong> para <strong>${message.to}</strong>: ${message.text} 
             </li>`
         }
     }
-   // console.log(ulMessages);
-    setInterval(pagestart(), 3000);    
+   // console.log(ulMessages);   
 }
 
 function sendMessage(){
@@ -107,7 +119,7 @@ function sendMessage(){
     // sucesso!
     promisse.then( pagestart ); // agendando a execucao da funcao quando a resposta chegar no meu computador  
     messagefield.value ='';
-    //promisse.catch(error);
+    promisse.catch(failure);
         
 }
 

@@ -70,6 +70,16 @@ ul {
 
 }
 
+.private-message {
+    width: 375px;
+    height: auto;
+    background: #FFDEDE;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    padding: 12px 8px;
+    line-height: 20px;
+}
+
 .message {
     width: 375px;
     height: auto;
@@ -77,8 +87,7 @@ ul {
     border-radius: 5px;
     margin-bottom: 4px;
     padding: 12px 8px;
-
-    
+    line-height: 20px;
 }
 
 .footer ion-icon {
