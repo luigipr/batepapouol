@@ -5,7 +5,7 @@ let load;
 let objName = {};
 axios.defaults.headers.common['Authorization'] = '2GkGoRP9ETlDO5k8paZaQY5V';
 
-pagestart();
+
 setInterval(pagestart, 3000);
 
 function pagestart() {
